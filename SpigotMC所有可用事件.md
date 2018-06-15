@@ -1133,3 +1133,296 @@
 - getEntity() `方法` 获得正在被玩家剪羊毛的实体对象。
 - isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
 - setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerStatisticIncrement()    当玩家统计信息增长时，触发本事件。
+* 这个事件不会因 Statistic.PLAY_ONE_TICK 或基于移动(比如玩家走动、坐矿车的距离等)的统计数据的改变而触发。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 统计信息增长的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getEntityType() `方法` 如果getStatistic()是关于实体的统计信息，获取该统计数据的实体种类，否则返回null。
+- getMaterial() `方法` 如果getStatistic()是关于方块或物品的统计信息，获取该统计数据的物品种类，否则返回null。
+- getNewValue() `方法` 获取这个统计数据的新数据值。
+- getPreviousValue() `方法` 获取这个统计信息之前的数据值。
+- getStatistic() `方法` 获取正在增长的统计数据。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerSwapHandItems()    玩家用快捷键互换主手和副手的物品时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 互换主手和副手的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getMainHandItem() `方法` 获取切换到主手的物品。
+- setMainHandItem(ItemStack mainHandItem) `方法` 设置主手里的物品。
+- getOffHandItem() `方法` 获取切换到副手的物品。
+- setOffHandItem(ItemStack offHandItem) `方法` 设置副手里的物品。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerTeleport()    玩家进行传送时，触发本事件。
+* 该接口继承自 PlayerMove 事件，即也可以使用 events.playerMove() 接口的方法。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 进行传送的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getCause() `方法` 获得此次传送的传送理由。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerToggleFlight()    玩家切换飞行状态时，触发本事件。
+* 该接口继承自 PlayerMove 事件，即也可以使用 events.playerMove() 接口的方法。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 切换飞行状态的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- isFlying() `方法` 返回玩家是否正在飞行或没有飞行。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerToggleSneak()    玩家切换潜行状态时，触发本事件。
+* 该接口继承自 PlayerMove 事件，即也可以使用 events.playerMove() 接口的方法。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 切换潜行状态的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- isSneaking() `方法` 获得玩家目前的潜行状态(正在潜行/没有潜行)。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerToggleSprint()    玩家切换疾跑状态时，触发本事件。
+* 该接口继承自 PlayerMove 事件，即也可以使用 events.playerMove() 接口的方法。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 切换疾跑状态的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- isSprinting() `方法` 获得玩家目前的疾跑状态(正在疾跑/没有疾跑)。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerUnleashEntity()    当一个实体被玩家解开拴绳时，触发本事件。
+* 该接口继承自 PlayerMove 事件，即也可以使用 events.playerMove() 接口的方法。
+回调函数中的 event 参数包含的字段有：
+- entity `对象引用` 被解开拴绳的实体。（这里使用 getEntity() 方法也能拿到该对象）
+- getPlayer() `方法` 获得解开拴绳的玩家。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerUnregisterChannel()    当玩家注销插件通道时，触发本事件。
+* 该接口继承自 PlayerMove 事件，即也可以使用 events.playerMove() 接口的方法。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 注销插件通道的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getChannel() `方法` 获得通道信息字符串。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerVelocity()    玩家移动速度变化时，触发本事件。
+* 该接口继承自 PlayerMove 事件，即也可以使用 events.playerMove() 接口的方法。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 移动速度变化的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getVelocity() `方法` 得到玩家目前的移动速度。
+- setVelocity(Vector velocity) `方法` 设置玩家目前的移动速度。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.broadcastMessage()    当服务广播消息时，触发本事件。（例如调用 Server.broadcast(String, String) 接口）
+回调函数中的 event 参数包含的字段有：
+- getMessage() `方法` 获取要广播的消息。
+- setMessage(java.lang.String message) `方法` 设置要广播的消息。
+- getRecipients() `方法` 获取将接收到该消息的用户集合。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.mapInitialize()    地图初始化时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- getMap() `方法` 获得地图初始化信息。
+
+# events.pluginDisable()    当一个插件被禁用时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- getPlugin() `方法` 得到被禁用的插件。（继承自 events.plugin() 接口）
+
+# events.pluginEnable()    当一个插件被启用时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- getPlugin() `方法` 得到被启用的插件。（继承自 events.plugin() 接口）
+
+# events.remoteServerCommand()    这个事件当服务器RCON收到指令时，触发本事件。
+* 该事件接口继承自 events.serverCommand() ，更多方法可以参考其父接口
+回调函数中的 event 参数包含的字段有：
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.serverCommand()    当服务器后台发送指令时，触发本事件。
+* 这是命令开始处理过程之前被触发的。
+* 很多插件都不使用此事件。如果这个事件不是必要的，你应该尽量避免使用它!
+回调函数中的 event 参数包含的字段有：
+- getCommand() `方法` 得到从控制台执行的命令(触发这个事件的命令)。
+- setCommand(java.lang.String message) `方法` 设置将要执行的命令。
+- getSender() `方法` 得到命令发送者(后台)。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.serverListPing()    当收到MOTD请求时，触发本事件。
+* 显示的玩家会被检查并会在这个事件里被 iterating 移出
+回调函数中的 event 参数包含的字段有：
+- getAddress() `方法` 获取请求来源地址。
+- getMaxPlayers() `方法` 获取最大玩家数量。
+- getMotd() `方法` 获取每日信息。
+- setMotd(java.lang.String motd) `方法` 更改每日信息。
+- getNumPlayers() `方法` 获取玩家数量。
+- iterator() `方法`调用 Iterator.remove() 方法将会强制部分玩家不会在玩家列表里显示，减小 getNumPlayers() 返回的大小，并且不会再被任何一个新的迭代器返回。
+- setMaxPlayers(int maxPlayers) `方法` 设置最大玩家数量。
+- setServerIcon(CachedServerIcon icon) `方法` 设置发送给客户端的服务器图标。
+
+# events.serviceRegister()    当一个服务注册时，触发本事件。
+* 注意：注册和注销的事件顺序不互相依赖。
+回调函数中的 event 参数包含的字段有：
+- getProvider() `方法` 获取服务提供者。
+
+# events.serviceUnregister()    当一个服务注销时，触发本事件。
+* 注意：注册和注销的事件顺序不互相依赖。
+回调函数中的 event 参数包含的字段有：
+- getProvider() `方法` 获取服务提供者。
+
+# events.tabComplete()    当一个 CommandSender 尝试补全命令时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- getBuffer() `方法` 返回构成这个补全项的命令缓冲区。
+- getCompletions() `方法` 提供给发送者的补全项的列表。
+- setCompletions(java.util.List<java.lang.String> completions) `方法` 设置提供的补全项，会覆盖已设置的补全项。
+- getSender() `方法` 获取正在补全这个命令的发送者。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.vehicleBlockCollision()    载具撞击方块时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- getBlock() `方法` 获取载具撞到的方块。
+
+# events.vehicleCreate()    载具创建时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.vehicleDamage()    载具被伤害时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- getAttacker() `方法` 获取攻击这个载具的实体。
+- getDamage() `方法` 获取载具受到的伤害数值。
+- setDamage(double damage) `方法` 设置载具受到的伤害数值。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.vehicleDestroy()    载具被损毁时（包含被玩家/自然损坏），触发本事件。若有一个船直接被"删除"了，这个事件将不会被调用。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- getAttacker() `方法` 获取损毁载具的实体，可能为null。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.vehicleEnter()    实体进入载具时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- getEntered() `方法` 获取进入到载具中的实体。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.vehicleEntityCollision()    载具撞击实体时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- getEntity() `方法` 被撞击的实体。
+- isCollisionCancelled() `方法` 获取撞击能否被取消。
+- setCollisionCancelled(boolean cancel) `方法` 设置撞击能否被取消。
+- isPickupCancelled() `方法` 获取拾起能否被取消。
+- setPickupCancelled(boolean cancel) `方法` 设置拾起能否被取消。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.vehicleExit()    实体退出载具时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- getExited() `方法` 获取退出载具事件的实体。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.vehicleMove()    载具移动时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+- getFrom() `方法` 获取载具的上一个位置。
+- getTo() `方法` 获取载具新的位置。
+
+# events.vehicleUpdate()    载具更新时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- vehicle `对象引用` 载具。（这里使用 getVehicle() 方法也能拿到该对象）
+
+# events.lightningStrike()    雷击某物时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+- getLightning() `方法` 获取从天空中打下的雷电。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.thunderChange()    打雷改变时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+- toThunderState() `方法` 获取世界是否正在打雷。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.weatherChange()    天气改变时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+- toWeatherState() `方法` 获取世界是否在下雨/雪。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.weather()    和天气有关的事件发生时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+
+# events.chunkLoad()    当一个区块被加载时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- chunk `对象引用` 区块。（这里使用 getChunk() 方法也能拿到该对象）
+- isNewChunk() `方法` 获取这个区块是否为最近创建的。
+
+# events.chunkPopulate()    当一个新的区块填充完毕时，触发本事件。
+* 如果您想利用本事件来填充区块，请参见 BlockPopulator 类。
+回调函数中的 event 参数包含的字段有：
+- chunk `对象引用` 区块。（这里使用 getChunk() 方法也能拿到该对象）
+
+# events.chunkUnload()    当一个区块被卸载时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- chunk `对象引用` 区块。（这里使用 getChunk() 方法也能拿到该对象）
+- isSaveChunk() `方法` 返回这个区块是否将被保存。
+- setSaveChunk(boolean saveChunk) `方法` 设置这个区块是否将被保存。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.portalCreate()    当传送门被创建时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+- getBlocks() `方法` 获取与创建的传送门所相关连的所有区块的数组列表。
+- getReason() `方法` 获取这个传送门的创建理由。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.spawnChange()    一个在世界的出生点被改变时（包含这个世界之前的出生点），触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+- getPreviousLocation() `方法` 获取之前的出生点位置。
+
+# events.structureGrow()    当一个有机结构试图生长的时，触发本事件。（树苗 -> 树, 蘑菇 -> 巨型蘑菇, 自然生长的或使用骨粉生长的）
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+- getBlocks() `方法` 获取与结构有关的所有方块的数组列表。
+- getLocation() `方法` 获取这个结构的位置。
+- getPlayer() `方法` 获取“种”下这个结构的玩家。
+- getSpecies() `方法` 获取物种类型（白桦、橡树、云杉、红蘑菇和棕蘑菇）。
+- isFromBonemeal() `方法` 检测此结构的生长是否使用骨粉。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.worldInit()    当一个世界被初始化时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+
+# events.worldLoad()    当一个世界被加载时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+
+# events.worldSave()    当一个世界被保存时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+
+# events.worldUnload()    当一个世界被卸载时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- world `对象引用` 世界。（这里使用 getWorld() 方法也能拿到该对象）
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
