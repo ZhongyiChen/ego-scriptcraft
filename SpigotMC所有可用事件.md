@@ -799,3 +799,337 @@
 - getInventory() `方法` 获取此事件涉及的主要物品栏（合成物品栏）。
 - getRecipe() `方法` 获取用于合成的清单。
 - isRepair() `方法` 用于检测该事件是否由工具修理操作触发而非合成清单触发。
+
+# events.asyncPlayerChat()    当玩家聊天时，触发这个事件。
+* 构造器提供了一个表示事件同步触发还是异步触发的布尔值。 当异步时，本事件可以被任何线程调用，无主线程，访问API受限。
+* 如果玩家通过传入的聊天数据包导致触发本事件，本事件将是异步的。 如果一个插件通过迫使玩家聊天（比如 Player.chat ）而触发本事件，本事件将是同步的。
+* 应注意通过 Event.isAsynchronous() 检查本事件是同步的还是异步的，适当地处理本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 消息发送者。（这里使用 getPlayer() 方法也能拿到该对象）
+- getFormat() `方法` 获取用于展示这条字符消息的格式。
+- setFormat(java.lang.String format) `方法` 设置用于展示这条字符消息的格式。
+- getMessage() `方法` 获得这个玩家试图发送的信息。
+- setMessage(java.lang.String message) `方法` 设置这个玩家将发送的信息。
+- getRecipients() `方法` 获取一个将看到这条消息的玩家的集合。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.asyncPlayerChat()    当玩家尝试登录服务器时，此事件主要用于存储尝试登录的玩家的详细信息。
+* 这个事件是异步的，不在主线程上执行。
+回调函数中的 event 参数包含的字段有：
+- allow() `方法` 允许玩家登录。
+- disallow(AsyncPlayerPreLoginEvent.Result result, java.lang.String message) `方法` 以给定的理由不允许玩家登录。
+- getAddress() `方法` 获取玩家的IP地址。
+- getKickMessage() `方法` 获取将要使用的踢出消息。
+- setKickMessage(java.lang.String message) `方法` 设置将要使用的踢出消息。
+- getLoginResult() `方法` 获取登录的状态。
+- setLoginResult(AsyncPlayerPreLoginEvent.Result result) `方法` 设置登录的状态。
+- getName() `方法` 获取玩家的名字。
+- getUniqueId() `方法` 获取玩家的唯一标识。
+
+# events.playerAdvancementDone()   当一个玩家完成了升一级所需的所有任务时，触发该事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 升级的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getAdvancement() `方法` 获取玩家完成的升级（类型为 Advancement ）。
+
+# events.playerAnimation()    当玩家进行某个动作时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 发出此动作的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getAnimationType() `方法` 获得此事件中玩家的动作类型。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerArmorStandManipulate()    当一个玩家操作衣架时，触发这个事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 操作衣架的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getArmorStandItem() `方法` 获取挂在衣架上的物品。
+- getPlayerItem() `方法` 获取玩家持有的物品。
+- getRightClicked() `方法` 获取被玩家点击的实体，即衣架。
+- getSlot() `方法` 返回在这次事件中衣架格子里原来的物品。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerBedEnter()    玩家躺在床上时，触发此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 躺在床上的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getBed() `方法` 返回此事件涉及的床。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerBedLeave()    玩家离开床时，触发此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 离开床的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getBed() `方法` 返回此事件涉及的床。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerBucketEmpty()    玩家用完一只桶后，触发此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 用完桶的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getBlockClicked() `方法` 玩家正在对着哪个方块使用桶，返回那个方块。（继承自 playerBucket 事件）
+- getBlockFace() `方法` 获取方块被点击的面。（继承自 playerBucket 事件）
+- getBucket() `方法` 返回玩家手里的桶的类型。（继承自 playerBucket 事件）
+- getItemStack() `方法` 返回使用桶之后会得到的物品堆叠。（继承自 playerBucket 事件）
+- setItemStack(ItemStack itemStack) `方法` 设置使用桶之后会得到的物品堆叠。（继承自 playerBucket 事件）
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerBucket()    当玩家使用桶时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 用完桶的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getBlockClicked() `方法` 玩家正在对着哪个方块使用桶，返回那个方块。
+- getBlockFace() `方法` 获取方块被点击的面。
+- getBucket() `方法` 返回玩家手里的桶的类型。
+- getItemStack() `方法` 返回使用桶之后会得到的物品堆叠。
+- setItemStack(ItemStack itemStack) `方法` 设置使用桶之后会得到的物品堆叠。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerBucketFill()    水桶装满水后，触发此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 装桶的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getBlockClicked() `方法` 玩家正在对着哪个方块使用桶，返回那个方块。（继承自 playerBucket 事件）
+- getBlockFace() `方法` 获取方块被点击的面。（继承自 playerBucket 事件）
+- getBucket() `方法` 返回玩家手里的桶的类型。（继承自 playerBucket 事件）
+- getItemStack() `方法` 返回使用桶之后会得到的物品堆叠。（继承自 playerBucket 事件）
+- setItemStack(ItemStack itemStack) `方法` 设置使用桶之后会得到的物品堆叠。（继承自 playerBucket 事件）
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerChangedMainHand()    当玩家在客户端设置改变主手时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 改变主手的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getMainHand() `方法` 获取玩家的新主手。旧的主手依然可以在此期间通过 HumanEntity.getMainHand() 获取到。
+
+# events.playerChangedWorld()    当玩家在客户端设置改变主手时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 切换到另外一个世界的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getFrom() `方法` 获得玩家切换到目标世界之前所在的世界。
+
+# events.playerChatTabComplete()    当玩家尝试补全聊天消息时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 尝试补全聊天消息的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getChatMessage() `方法` 获取将被补全的聊天消息。
+- getLastToken() `方法` 获取被补全消息的最后一个'标记'（String 类型）。
+- getTabCompletions() `方法` 获取所有补全项集合（String List 类型）。
+
+# events.playerCommandPreprocess()    当一个玩家执行一个命令（也就是在聊天框里面输入信息以/开头的时候，算作命令）时，触发本事件。
+* 这个事件是早于插件的onCommand接收的命令的。
+* 如果你此时调用setMessage(String)方法的话,其他插件收到的命令将会是你更改以后的命令。
+* 如果没必要，请避免使用此事件。
+* 如果该事件满足条件被取消掉,对应的命令将会无法发挥任何作用。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 执行命令的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getMessage() `方法` 获取所发送的命令的所有字符串。
+- setMessage(java.lang.String command) `方法` 设置玩家即将要发送的命令的字符串。虽然所获取的命令字符串会带有一个“/”，但你设置命令的时候，不用再输入这个“/”。
+- setPlayer(Player player) `方法` 设置这个命令的执行者。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerDropItem()    当玩家丢出物品时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 丢出物品的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getItemDrop() `方法` 获得此玩家丢出的物品。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerEditBook()    当玩家编辑或签名图书时，触发此事件。如果事件中断取消，图书和笔的元数据不会改变。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 编辑图书的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getNewBookMeta() `方法` 获取玩家试图新增的书本元数据。
+- setNewBookMeta(BookMeta newBookMeta) `方法` 设置新增的书本元数据。
+- getPreviousBookMeta() `方法` 获取当前书本元数据。
+- getSlot() `方法` 获取触发事件时，书本在物品栏所在的格子序号。
+- isSigning() `方法` 检测书本是否正在被签名。
+- setSigning(boolean signing) `方法` 设置书本是否正在被签名。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerEggThrow()    玩家抛出鸡蛋时，触发本事件，鸡蛋可能孵化。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 抛出鸡蛋的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getEgg() `方法` 获取事件中的鸡蛋。
+- getHatchingType() `方法` 获取将被孵化的生物类型（默认为EntityType.CHICKEN）。
+- setHatchingType(EntityType hatchType) `方法` 修改将被孵化生物的类型。
+- getNumHatches() `方法` 检测将被孵化生物的数量。
+- setNumHatches(byte numHatches) `方法` 改变将被孵化生物的数量。
+- isHatching() `方法` 检测鸡蛋是否将被孵化。
+- setHatching(boolean hatching) `方法` 设置鸡蛋是否将被孵化。
+
+# events.playerExpChange()    当玩家经验值发生变化时，调用此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 此事件中的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getAmount() `方法` 获得玩家将要获得的经验数值。
+- setAmount(int amount) `方法` 设置玩家将要获得的经验数值。
+
+# events.playerFish()    当玩家钓鱼时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 钓鱼的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getCaught() `方法` 获取被玩家钓到的实体。
+- getExpToDrop() `方法` 返回玩家钓鱼时所获得的经验数值。
+- setExpToDrop(int amount) `方法` 修改玩家钓鱼时所获得的经验数值。
+- getHook() `方法` 获取鱼钩。
+- getState() `方法` 获取当前垂钓的状态。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerGameModeChange()    当玩家游戏模式发生变化时，调用此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 发生模式变化的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getNewGameMode() `方法` 获取玩家切换后的游戏模式。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerInteractAtEntity()    当玩家在实体上点击它的某位置时，触发此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 点击某个实体的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- clickedEntity `对象引用` 被点击的实体。（这里使用 getRightClicked() 方法也能拿到该对象），继承自 playerInteractEntity 事件。
+- getClickedPosition() `方法` 获取被点击的位置向量。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerInteractEntity()    当玩家点击一个实体时，调用此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 点击某个实体的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- clickedEntity `对象引用` 被点击的实体。（这里使用 getRightClicked()) 方法也能拿到该对象）
+- getHand() `方法` 获取用于执行这次交互的手。（该方法继承自 playerInteract 事件）
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerInteract()    当玩家对一个对象或空气进行交互时，触发本事件。可能在左右手交互时也会触发。
+* 你可以使用 getHand() 方法来确定是哪只手。
+* 如果是原版行为触发了本事件, 则本事件将会被取消（例如与空气进行交互）
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 进行交互的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getAction() `方法` 获取本次交互的类型。
+- getBlockFace() `方法` 返回被点击的方块的朝向。
+- getClickedBlock() `方法` 返回被点击的方块。
+- setUseInteractedBlock(Event.Result useInteractedBlock)  `方法` 设置这次被交互的方块。
+- getHand() `方法` 获取用来执行本次交互的手, 但当 getAction() 为 Action.PHYSICAL 时可能为空。
+- getItem() `方法` 获取本事件玩家手中的物品, 手中物品为空时会返回 null 。
+- getMaterial() `方法` 方便的方法，返回由此事件表示的物品的材质。
+- hasBlock() `方法` 检查这个事件是否涉及到一个方块。
+- hasItem() `方法` 检查这个事件是否涉及一个物品。
+- isBlockInHand() `方法` 返回这个事件触发是否由放置方块所触发的。
+- useInteractedBlock() `方法` 该方法会得到在对方块进行点击后（如果有的话）所采取的动作。
+- useItemInHand() `方法` 该方法会得到玩家拿着的物品的动作。
+- setUseItemInHand(Event.Result useItemInHand) `方法` 设置交互手中的方块。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。取消此事件会阻止玩家吃东西(玩家不会失去食物), 阻止弓箭/雪球/蛋发射...(玩家不会失去弹药)
+
+# events.playerItemBreak()    某玩家工具耐久消耗完毕时（比如铲子，打火石，铁制工具），调用此事件。当物品耐久值为0时，将触发此事件。事件结束后，物品耐久值将复位至0。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 持有该工具的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getBrokenItem() `方法` 获得因耐久值不足将要被销毁的物品。
+
+# events.playerItemConsume()    当玩家消耗一个物品时（例如实物、药水、牛奶桶），触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 消耗物品的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getItem() `方法` 获取被将被消耗的物品。
+- setItem(ItemStack item) `方法` 设置被将被消耗的物品。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerItemConsume()    当玩家手持某物品时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 手持物品的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getNewSlot() `方法` 获得玩家此次手持物品的物品槽位置（索引）。
+- getPreviousSlot() `方法` 获得玩家上一次手持物品的物品槽位置。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerJoin()    当玩家进入服务器时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 进入服务器的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getJoinMessage() `方法` 获取玩家加入游戏后发送给全体玩家的信息。
+- setJoinMessage(java.lang.String joinMessage) `方法` 设置玩家加入游戏后发送给全体玩家的信息。
+
+# events.playerKick()    当玩家被服务器踢出时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 被服务器踢出的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getLeaveMessage() `方法` 获取某玩家被踢出后，发送给全体玩家的离开消息。
+- setLeaveMessage(java.lang.String leaveMessage) `方法` 设置某玩家被踢出后，发送给全体玩家的离开消息。
+- getReason() `方法` 获取踢出的玩家的理由。
+- setReason(java.lang.String kickReason) `方法` 设置踢出的玩家的理由。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerLevelChange()    当玩家等级改变时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 等级值发生改变的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getNewLevel() `方法` 获得此玩家要改变成的等级值。
+- getOldLevel() `方法` 获得此玩家改变之前的经验值。
+
+# events.playerLocaleChange()    当玩家改变他们的语言设置时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 改变语言的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getLocale() `方法` 获取玩家选择的语言。
+
+# events.playerLogin()    当玩家尝试登录时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 尝试登录的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- allow() `方法` 允许玩家登录。
+- disallow(PlayerLoginEvent.Result result, java.lang.String message) `方法` 以给定的理由不允许玩家登录。
+- getAddress() `方法` 获取玩家的IP地址。
+- getHostname() `方法` 获取玩家用于连接服务器的主机名，如果未知则为空。
+- getKickMessage() `方法` 如果玩家被拒绝登录，则可通过该方法获取被踢出的原因。
+- setKickMessage(java.lang.String message) `方法` 如果玩家被拒绝登录，则可通过该方法设置被踢出的原因。
+- getResult() `方法` 获取当前的登录状态。
+- setResult(PlayerLoginEvent.Result result) `方法` 设置当前的登录状态。
+
+# events.playerMove()    当玩家移动时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 在移动的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getFrom() `方法` 得到玩家移动到此位置之前的位置。
+- setFrom(Location from) `方法` 设置玩家将要移动到此位置之前的位置。
+- getTo() `方法` 得到玩家移动到的位置。
+- setTo(Location to) `方法` 设置玩家将要移动的位置。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerPickupArrow()   当玩家从地上捡起箭时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 捡起箭的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getArrow() `方法` 获取玩家捡起的箭。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerPortal()    玩家将要被传送门传送时，触发本事件。（其他实体被传送门传送的事件请见 entityPortal 事件）
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 将要被传送的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getPortalTravelAgent() `方法` 获得玩家在这个事件中使用的传送门。
+- setPortalTravelAgent(TravelAgent travelAgent) `方法` 设置玩家在这个事件中使用的传送门。
+- useTravelAgent() `方法` 得到是否让玩家传送到另一端的传送门。
+- useTravelAgent(boolean useTravelAgent) `方法` 设置是否让玩家传送到另一端的传送门。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
+
+# events.playerQuit()    玩家离开服务器时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 离开服务器的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getQuitMessage() `方法` 获取某玩家离开游戏后，发送给全体玩家的离开消息。
+- setQuitMessage(java.lang.String quitMessage) `方法` 设置某玩家离开游戏后，发送给全体玩家的离开消息。
+
+# events.playerRegisterChannel()    玩家注册通信通道之后，立即触发此事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 注册通信通道的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getChannel() `方法` 获取通信通道。
+
+# events.playerResourcePackStatus()    当玩家对通过 Player.setResourcePack(java.lang.String) 发起的资源包请求动作时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 发起的资源包请求动作的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getStatus() `方法` 获取这个资源包的状态。
+
+# events.playerRespawn()    玩家重生时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 重生的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getRespawnLocation() `方法` 获取当前重生的位置。
+- setRespawnLocation(Location respawnLocation) `方法` 设置一个新的重生位置。
+- isBedSpawn() `方法` 获取此玩家是否在他的床上重生。
+
+# events.playerShearEntity()    玩家剪羊毛时，触发本事件。
+回调函数中的 event 参数包含的字段有：
+- player `对象引用` 剪羊毛的玩家。（这里使用 getPlayer() 方法也能拿到该对象）
+- getEntity() `方法` 获得正在被玩家剪羊毛的实体对象。
+- isCancelled() `方法` 该事件是否已经被取消。一个被取消的事件不会在服务器里被执行，但是仍然会传递事件到其他插件。
+- setCancelled(boolean cancel) `方法` 取消这个事件。
