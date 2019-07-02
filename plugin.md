@@ -1,2 +1,0 @@
-- scoreboardplus(插件): https://www.spigotmc.org/resources/scoreboardplus-1-8-t-m-1-12-1000-placeholders-disable-worlds-a-lot-more.42605/
-- placeholders(占位符例子): https://www.spigotmc.org/wiki/placeholderapi-placeholders/
